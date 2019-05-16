@@ -14,7 +14,6 @@ const DeprecatedImageStylePropTypes = require('../DeprecatedPropTypes/Deprecated
 const DeprecatedStyleSheetPropType = require('../DeprecatedPropTypes/DeprecatedStyleSheetPropType');
 const DeprecatedViewPropTypes = require('../DeprecatedPropTypes/DeprecatedViewPropTypes');
 const ImageViewNativeComponent = require('./ImageViewNativeComponent');
-const NativeModules = require('../BatchedBridge/NativeModules');
 const PropTypes = require('prop-types');
 const React = require('react');
 const ReactNative = require('../Renderer/shims/ReactNative'); // eslint-disable-line no-unused-vars
