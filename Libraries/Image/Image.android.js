@@ -25,7 +25,7 @@ const flattenStyle = require('../StyleSheet/flattenStyle');
 const merge = require('../vendor/core/merge');
 const resolveAssetSource = require('./resolveAssetSource');
 
-const {ImageLoader} = NativeModules;
+const NativeImageLoader = require('./NativeImageLoader').default;
 
 const TextInlineImageNativeComponent = require('./TextInlineImageNativeComponent');
 
@@ -133,7 +133,7 @@ function getSize(
   success: (width: number, height: number) => void,
   failure?: (error: any) => void,
 ) {
-  return ImageLoader.getSize(url)
+  return NativeImageLoader.getSize(url)
     .then(function(sizes) {
       success(sizes.width, sizes.height);
     })
@@ -157,7 +157,7 @@ function getSizeWithHeaders(
   success: (width: number, height: number) => void,
   failure?: (error: any) => void,
 ) {
-  return ImageLoader.getSizeWithHeaders(url, headers)
+  return NativeImageLoader.getSizeWithHeaders(url, headers)
     .then(function(sizes) {
       success(sizes.width, sizes.height);
     })
@@ -172,11 +172,11 @@ function getSizeWithHeaders(
 function prefetch(url: string, callback: ?Function) {
   const requestId = generateRequestId();
   callback && callback(requestId);
-  return ImageLoader.prefetchImage(url, requestId);
+  return NativeImageLoader.prefetchImage(url, requestId);
 }
 
 function abortPrefetch(requestId: number) {
-  ImageLoader.abortRequest(requestId);
+  NativeImageLoader.abortRequest(requestId);
 }
 
 /**
@@ -187,7 +187,7 @@ function abortPrefetch(requestId: number) {
 async function queryCache(
   urls: Array<string>,
 ): Promise<{[string]: 'memory' | 'disk' | 'disk/memory'}> {
-  return await ImageLoader.queryCache(urls);
+  return await NativeImageLoader.queryCache(urls);
 }
 
 declare class ImageComponentType extends ReactNative.NativeComponent<ImagePropsType> {
